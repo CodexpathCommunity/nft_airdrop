@@ -123,7 +123,7 @@ function NFTDrop({ collections }: Props) {
     const notification = toast.loading('Minting NFT...', {
       style: {
         background: 'white',
-        color: 'pink',
+        color: '#42275a',
         borderRadius: '10px',
         padding: '10px',
         fontSize: '1.2rem',
@@ -140,7 +140,7 @@ function NFTDrop({ collections }: Props) {
           duration: 800,
           style: {
             background: 'white',
-            color: 'pink',
+            color: '#42275a',
             borderRadius: '10px',
             padding: '10px',
             fontSize: '1.2rem',
@@ -153,7 +153,6 @@ function NFTDrop({ collections }: Props) {
         console.log(claimedNft)
         setNftDAta(claimedNft)
         setClaimedSupply(claimedSupply + 1)
-        setOpen(true)
       })
       .catch((err) =>
         toast('something went wrong...', {
@@ -171,6 +170,7 @@ function NFTDrop({ collections }: Props) {
       .finally(() => {
         setLoading(false)
         toast.dismiss(notification)
+        setOpen(true)
       })
   }
 
@@ -194,10 +194,10 @@ function NFTDrop({ collections }: Props) {
             className="h-96 w-60 rounded-2xl object-fill"
           />
           <div className="">
-            <h1 className="text-center text-4xl font-bold">
+            <h1 className="text-center text-4xl font-bold text-[#42275a]">
               {nftDAta?.metadata?.name}
             </h1>
-            <h1 className="text-center text-3xl font-semibold">
+            <h1 className="text-center text-3xl font-semibold text-[#42275a]">
               {nftDAta?.metadata?.description}
             </h1>
           </div>
@@ -205,7 +205,7 @@ function NFTDrop({ collections }: Props) {
             onClick={() => {
               window.open(`https://testnets.opensea.io/account`, '_blank')
             }}
-            className="md: mt-auto h-16 w-full rounded-full bg-rose-600 font-bold text-white"
+            className="md: mt-auto h-16 w-full rounded-full bg-[#734b6d] font-bold text-white"
           >
             view on open sea
           </button>
@@ -213,7 +213,7 @@ function NFTDrop({ collections }: Props) {
       </MaterialModal>
 
       {/* left */}
-      <div className="bg-gradient-to-br from-cyan-800 to-rose-500 lg:col-span-4">
+      <div className="bg-gradient-to-br from-[#42275a] to-[#734b6d] lg:col-span-4">
         <div className="flex flex-col items-center justify-center py-2 lg:min-h-screen">
           <div className="rounded-xl bg-gradient-to-br from-yellow-400 to-purple-600 p-2">
             <img
@@ -237,16 +237,15 @@ function NFTDrop({ collections }: Props) {
         <header className="flex items-center justify-between">
           <Link href={'/'}>
             <h1 className="w-52 cursor-pointer text-xl font-extralight sm:w-80">
-              the{' '}
-              <span className="font-extrabold underline decoration-pink-600/50">
-                babes
+              <span className="font-extrabold text-[#42275a] underline decoration-[#42275a]">
+                meta-art
               </span>{' '}
               nft market place
             </h1>
           </Link>
           <button
             onClick={() => (address ? disconnect() : connectWithMetaMask())}
-            className="rounded-full bg-rose-400 px-4 py-2 text-xs font-bold text-white lg:px-5 lg:py-3"
+            className="rounded-full bg-[#734b6d] px-4 py-2 text-xs font-bold text-white lg:px-5 lg:py-3"
           >
             {address ? 'sign-out' : 'sign-in with metamask'}
           </button>
@@ -255,7 +254,7 @@ function NFTDrop({ collections }: Props) {
         <hr className="my-2 border" />
 
         {address && (
-          <p className="text-center text-sm text-rose-400 ">
+          <p className="text-center text-sm text-[#42275a] ">
             you're logged in with the wallet{' '}
             {address.substring(0, 6) +
               '...' +
@@ -272,7 +271,7 @@ function NFTDrop({ collections }: Props) {
             className="w-80 object-cover pb-10 lg:h-40"
           />
 
-          <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
+          <h1 className="text-3xl font-bold text-[#42275a] lg:text-5xl lg:font-extrabold">
             {collections.title}
           </h1>
 
@@ -303,7 +302,7 @@ function NFTDrop({ collections }: Props) {
           disabled={
             loading || claimedSupply === totalSupply?.toNumber() || !address
           }
-          className="mt-10 h-16 w-full rounded-full bg-rose-600 font-bold text-white disabled:bg-gray-400 disabled:text-gray-300"
+          className="mt-10 h-16 w-full rounded-full bg-[#734b6d] font-bold text-white disabled:bg-gray-400 disabled:text-gray-300"
         >
           {loading
             ? 'loading'

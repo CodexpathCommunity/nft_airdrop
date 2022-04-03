@@ -11,43 +11,51 @@ interface Props {
 
 const Home = ({ collections }: Props) => {
   return (
-    <div className="mx-auto flex min-h-screen max-w-7xl flex-col py-20 px-10 2xl:px-0">
+    <div className="bg-gradient-to-br from-[#42275a] to-[#734b6d]">
       <Head>
         <title>NFT AirDrop</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-10 shadow-[#42275a] 2xl:px-0">
+        <header className="relative flex h-[80vh] flex-col items-center justify-center bg-[url('/images/001.png')] bg-contain p-6">
+          <h1 className="text-center text-7xl font-extrabold text-[white] ">
+            Discover and Collect Super Rare Digital Artworks and NFTs
+          </h1>
+          <h1 className="absolute top-2 left-2 text-4xl font-bold text-[#42275a]">
+            META- <span className="text-[#734b6d]">ART</span>{' '}
+          </h1>
+        </header>
 
-      <div className="space-y-2 p-5 text-center">
-        <h1 className="text-4xl font-bold text-white">
-          babes nft collections{' '}
-        </h1>
-        <h1 className="text-xl text-gray-300">
-          a collection of hot babes to grab as nfts
-        </h1>
-      </div>
+        <main className=" p-10 shadow-xl shadow-[#42275a]">
+          <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+            {collections.map((collection) => (
+              <Link
+                href={`/nfts/${collection.slug.current}`}
+                key={collection.slug.current}
+              >
+                <div className="flex cursor-pointer flex-col items-center justify-center text-center transition-all duration-200 hover:scale-105">
+                  <img
+                    src={urlFor(collection.mainImage).url()}
+                    alt=""
+                    className="h-96 w-60 rounded-2xl object-cover"
+                  />
 
-      <main className="bg-slate-100 p-10 shadow-xl shadow-rose-400/20">
-        <div className="grid space-x-3 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          {collections.map((collection) => (
-            <Link href={`/nfts/${collection.slug.current}`}>
-              <div className="flex cursor-pointer flex-col items-center justify-center text-center transition-all duration-200 hover:scale-105">
-                <img
-                  src={urlFor(collection.mainImage).url()}
-                  alt=""
-                  className="h-96 w-60 rounded-2xl object-cover"
-                />
-
-                <div className="p-5">
-                  <h2 className="text-3xl">{collection.title}</h2>
-                  <p className="mt-2 text-xl text-gray-400">
-                    {collection.description}
-                  </p>
+                  <div className="p-5">
+                    <h2 className="text-3xl text-white">{collection.title}</h2>
+                    <p className="mt-2 text-xl text-gray-400">
+                      {collection.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </main>
+              </Link>
+            ))}
+          </div>
+        </main>
+
+        <footer className="flex items-center justify-center p-4">
+          <p className="text-white">made with love by Emmanuel Jacob</p>
+        </footer>
+      </div>
     </div>
   )
 }
