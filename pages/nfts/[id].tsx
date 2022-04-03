@@ -1,7 +1,15 @@
 import React from 'react'
 import { useAddress, useDisconnect, useMetamask } from '@thirdweb-dev/react'
+import { GetServerSideProps } from 'next'
+import { sanityClient, urlFor } from '../../sanity'
+import { Collections } from '../../typings'
+import Link from 'next/link'
 
-function NFTDrop() {
+interface Props {
+  collections: Collections
+}
+
+function NFTDrop({ collections }: Props) {
   const connectWithMetaMask = useMetamask()
   const address = useAddress()
   const disconnect = useDisconnect()
@@ -15,16 +23,14 @@ function NFTDrop() {
             <img
               className="w-44 rounded-xl object-cover lg:h-96 lg:w-72"
               alt=""
-              src="https://res.cloudinary.com/dqzqilslm/image/upload/v1648816314/media/images/Emmanuel-Jacob.png"
+              src={urlFor(collections.mainImage).url()}
             />
           </div>
           <div className="space-y-2 p-5 text-center">
             <h1 className="text-4xl font-bold text-white">
-              codexpath nft collections{' '}
+              {collections.nftCollectionName}
             </h1>
-            <h1 className="text-xl text-gray-300">
-              a collection of codexpath apes, we live, breathe, mint nfts
-            </h1>
+            <h1 className="text-xl text-gray-300">{collections.description}</h1>
           </div>
         </div>
       </div>
@@ -33,13 +39,15 @@ function NFTDrop() {
       <div className="flex flex-1 flex-col p-12 lg:col-span-6">
         {/* header */}
         <header className="flex items-center justify-between">
-          <h1 className="w-52 cursor-pointer text-xl font-extralight sm:w-80">
-            the{' '}
-            <span className="font-extrabold underline decoration-pink-600/50">
-              codexpath
-            </span>{' '}
-            nft market place
-          </h1>
+          <Link href={'/'}>
+            <h1 className="w-52 cursor-pointer text-xl font-extralight sm:w-80">
+              the{' '}
+              <span className="font-extrabold underline decoration-pink-600/50">
+                babes
+              </span>{' '}
+              nft market place
+            </h1>
+          </Link>
           <button
             onClick={() => (address ? disconnect() : connectWithMetaMask())}
             className="rounded-full bg-rose-400 px-4 py-2 text-xs font-bold text-white lg:px-5 lg:py-3"
@@ -63,13 +71,13 @@ function NFTDrop() {
 
         <div className="mt-10 flex flex-1 flex-col items-center  space-y-6 text-center lg:justify-center lg:space-y-0">
           <img
-            src="https://links.papareact.com/bdy"
+            src={urlFor(collections.previewImage).url()}
             alt=""
             className="w-80 object-cover pb-10 lg:h-40"
           />
 
           <h1 className="text-3xl font-bold lg:text-5xl lg:font-extrabold">
-            the codexpath ape nft drop
+            {collections.title}
           </h1>
 
           <p className="pt-2 text-xl text-green-500">13 / 21 NFTs claimed</p>
@@ -86,3 +94,47 @@ function NFTDrop() {
 }
 
 export default NFTDrop
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const query = `
+  *[_type == "collection" && slug.current == $id][0] {
+  _id,
+  title,
+  address,
+  description,
+  nftCollectionName,
+  mainImage {
+  asset
+},
+previewImage{
+  asset
+},
+slug {
+  current
+},
+creator-> {
+  _id,
+  name,
+  address,
+  slug {
+  current
+}
+}
+}
+  `
+  const collections = await sanityClient.fetch(query, {
+    id: params?.id,
+  })
+
+  if (!collections) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: {
+      collections,
+    },
+  }
+}

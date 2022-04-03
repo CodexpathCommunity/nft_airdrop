@@ -1,6 +1,5 @@
 import { createClient, createCurrentUserHook } from 'next-sanity'
 import createImageUrlBuilder from '@sanity/image-url'
-import { config } from './config'
 
 export const config = {
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || 'production',
