@@ -6,14 +6,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
+    "@mui/material": "^5.5.3",
     "@sanity/image-url": "^1.0.1",
     "@thirdweb-dev/react": "^2.0.3",
     "@thirdweb-dev/sdk": "^2.0.22",
+    "@types/styled-components": "^5.1.24",
     "ethers": "^5.6.2",
     "next": "latest",
     "next-sanity": "^0.5.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-hot-toast": "^2.2.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "@types/node": "17.0.4",
