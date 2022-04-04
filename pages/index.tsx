@@ -16,9 +16,9 @@ const Home = ({ collections }: Props) => {
         <title>NFT AirDrop</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-10 shadow-[#42275a] 2xl:px-0">
-        <header className="relative flex h-[80vh] flex-col items-center justify-center bg-[url('/images/001.png')] bg-contain p-6">
-          <h1 className="text-center text-7xl font-extrabold text-[white] ">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col  shadow-[#42275a] 2xl:px-0">
+        <header className="relative flex h-screen flex-col items-center justify-center bg-[url('/images/001.png')] bg-cover p-6 lg:h-[80vh]">
+          <h1 className="text-center text-6xl font-extrabold leading-[5rem] text-[white] lg:text-6xl ">
             Discover and Collect Super Rare Digital Artworks and NFTs
           </h1>
           <h1 className="absolute top-2 left-2 text-4xl font-bold text-[#42275a]">
