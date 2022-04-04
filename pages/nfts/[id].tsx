@@ -182,7 +182,10 @@ function NFTDrop({ collections }: Props) {
 
       <MaterialModal
         open={open}
-        onClose={() => setOpen(false)}
+        onClose={() => {
+          setOpen(false)
+          setNftDAta(null)
+        }}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
