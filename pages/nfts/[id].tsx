@@ -94,7 +94,7 @@ function NFTDrop({ collections }: Props) {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const [loading, setLoading] = useState<boolean>(true)
   const nftDrop = useNFTDrop(collections.address)
-  const [nftDAta, setNftDAta] = useState<any>()
+  const [nftDAta, setNftDAta] = useState<any>(null)
 
   //auth
   const connectWithMetaMask = useMetamask()
@@ -170,7 +170,9 @@ function NFTDrop({ collections }: Props) {
       .finally(() => {
         setLoading(false)
         toast.dismiss(notification)
-        setOpen(true)
+        if (nftDAta) {
+          setOpen(true)
+        }
       })
   }
 
